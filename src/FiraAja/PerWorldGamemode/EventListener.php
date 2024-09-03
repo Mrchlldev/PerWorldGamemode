@@ -6,6 +6,7 @@ use pocketmine\event\entity\EntityTeleportEvent;
 use pocketmine\event\Listener;
 use pocketmine\player\GameMode;
 use pocketmine\player\Player;
+use pocketmine\Server;
 
 class EventListener implements Listener {
 
@@ -33,6 +34,9 @@ class EventListener implements Listener {
         }
         if(!isset($this->plugin->config->get("worlds")[$world->getFolderName()])){
             return;
+        }
+        if(Server::getInstance()->isOp(strtolower($player->getName()))){
+            $player->setGamemode(GameMode::fromString($this->plugin->config->get("op-player")["gamemode"]));
         }
         $player->setGamemode(GameMode::fromString($this->plugin->config->get("worlds")[$world->getFolderName()]["gamemode"]));
     }
