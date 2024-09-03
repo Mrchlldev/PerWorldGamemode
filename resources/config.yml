@@ -1,3 +1,5 @@
+op-player:
+  gamemode: creative
 worlds:
   world1:
     gamemode: survival
